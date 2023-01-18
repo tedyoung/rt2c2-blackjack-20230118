@@ -20,7 +20,7 @@ public class HandDisplayTest {
         Hand hand = new Hand(List.of(new Card(Suit.DIAMONDS, Rank.JACK),
                                      new Card(Suit.SPADES, Rank.FIVE)));
 
-        String output = hand.cardsAsString();
+        String output = ConsoleHand.cardsAsString(hand);
 
         assertThat(output)
                 .isEqualTo("[31m┌─────────┐[1B[11D│J        │[1B[11D│         │[1B[11D│    ♦    │[1B[11D│         │[1B[11D│        J│[1B[11D└─────────┘[6A[1C[30m┌─────────┐[1B[11D│5        │[1B[11D│         │[1B[11D│    ♠    │[1B[11D│         │[1B[11D│        5│[1B[11D└─────────┘");
