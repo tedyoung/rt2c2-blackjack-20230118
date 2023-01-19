@@ -8,10 +8,7 @@ class GameOutcomeTest {
 
     @Test
     void playerHitsAndGoesBustThenOutcomeIsPlayerLoses() {
-        Deck playerHitsAndGoesBustDeck = new StubDeck(Rank.TEN, Rank.EIGHT,
-                                                      Rank.QUEEN, Rank.JACK,
-                                                      Rank.THREE);
-        Game game = new Game(playerHitsAndGoesBustDeck);
+        Game game = new Game(StubDeck.createPlayerHitsAndGoesBust());
         game.initialDeal();
 
         game.playerHits();
@@ -22,9 +19,7 @@ class GameOutcomeTest {
 
     @Test
     void playerDealtBetterHandThanDealerAndStandsThenPlayerBeatsDealer() {
-        Deck playerStandsAndBeatsDealer = new StubDeck(Rank.TEN, Rank.EIGHT,
-                                                       Rank.QUEEN, Rank.JACK);
-        Game game = new Game(playerStandsAndBeatsDealer);
+        Game game = new Game(StubDeck.playerStandsAndBeatsDealer());
         game.initialDeal();
 
         game.playerStands();
@@ -33,6 +28,19 @@ class GameOutcomeTest {
         assertThat(game.determineOutcome())
                 .isEqualTo("You beat the Dealer! 💵");
     }
+
+    @Test
+    void playerDealtHandWithSameValueAsDealerThenPlayerPushesDealer() {
+        Game game = new Game(StubDeck.playerStandsAndPushesDealer());
+        game.initialDeal();
+
+        game.playerStands();
+        game.dealerTurn();
+
+        assertThat(game.determineOutcome())
+                .isEqualTo("Push: Nobody wins, we'll call it even.");
+    }
+
 }
 
 
