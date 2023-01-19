@@ -1,8 +1,10 @@
-package com.jitterted.ebp.blackjack;
+package com.jitterted.ebp.blackjack.adapter.in.console;
+
+import com.jitterted.ebp.blackjack.domain.Game;
 
 public class ConsoleGame {
 
-    private final Game game;
+    private final Game game; // in reality, adapter classes don't hold onto domain state
 
     public ConsoleGame(Game game) {
         this.game = game;
