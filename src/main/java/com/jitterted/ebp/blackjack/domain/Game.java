@@ -1,11 +1,6 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import com.jitterted.ebp.blackjack.adapter.in.console.ConsoleCard;
-import com.jitterted.ebp.blackjack.adapter.in.console.ConsoleHand;
-
 import java.util.Scanner;
-
-import static org.fusesource.jansi.Ansi.ansi;
 
 public class Game {
 
@@ -60,32 +55,21 @@ public class Game {
         return scanner.nextLine();
     }
 
-    public void displayGameState() {
-        System.out.print(ansi().eraseScreen().cursor(1, 1));
-        System.out.println("Dealer has: ");
-        System.out.println(ConsoleHand.displayFaceUpCard(dealerHand));
 
-        // second card is the hole card, which is hidden, or "face down"
-        ConsoleCard.displayBackOfCard();
-
-        System.out.println();
-        System.out.println("Player has: ");
-        System.out.println(ConsoleHand.cardsAsString(playerHand));
-        System.out.println(" (" + playerHand.value() + ")");
+    public Hand playerHand() {
+        return playerHand;
     }
 
-    public void displayFinalGameState() {
-        System.out.print(ansi().eraseScreen().cursor(1, 1));
-        System.out.println("Dealer has: ");
-        System.out.println(ConsoleHand.cardsAsString(dealerHand));
-        System.out.println(" (" + dealerHand.value() + ")");
-
-        System.out.println();
-        System.out.println("Player has: ");
-        System.out.println(ConsoleHand.cardsAsString(playerHand));
-        System.out.println(" (" + playerHand.value() + ")");
+    // QUERY METHOD RULE
+    // 1. Hand: mutable, not a snapshot, internal information
+    // 1a. Copy of Hand: mutable (confusing to the client)
+    // 1b. "Read Only" interface for Hand: HandReadOnly (no command methods?)
+    // 2. New class, a Value Object: HandValue - list of cards, face up card (dealt), and score (value)
+    // 2a. HandView: Data Transfer Object - getters/setters for the cards, face-up card, and value
+    //          DTOs belong in Adapters, do NOT belong in the Domain
+    public Hand dealerHand() {
+        return dealerHand;
     }
-
 
     public void playerHits() {
         playerHand.drawFrom(deck);

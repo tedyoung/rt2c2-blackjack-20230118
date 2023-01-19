@@ -37,6 +37,32 @@ public class ConsoleGame {
                                    .fgBlack().a(" BlackJack game"));
     }
 
+    public static void displayGameState(Game game) {
+        System.out.print(ansi().eraseScreen().cursor(1, 1));
+        System.out.println("Dealer has: ");
+        System.out.println(ConsoleHand.displayFaceUpCard(game.dealerHand()));
+
+        // second card is the hole card, which is hidden, or "face down"
+        ConsoleCard.displayBackOfCard();
+
+        System.out.println();
+        System.out.println("Player has: ");
+        System.out.println(ConsoleHand.cardsAsString(game.playerHand()));
+        System.out.println(" (" + game.playerHand().value() + ")");
+    }
+
+    public static void displayFinalGameState(Game game) {
+        System.out.print(ansi().eraseScreen().cursor(1, 1));
+        System.out.println("Dealer has: ");
+        System.out.println(ConsoleHand.cardsAsString(game.dealerHand()));
+        System.out.println(" (" + game.dealerHand().value() + ")");
+
+        System.out.println();
+        System.out.println("Player has: ");
+        System.out.println(ConsoleHand.cardsAsString(game.playerHand()));
+        System.out.println(" (" + game.playerHand().value() + ")");
+    }
+
     public void start() {
         displayWelcomeScreen();
         waitForEnterFromUser();
@@ -47,7 +73,7 @@ public class ConsoleGame {
 
         game.dealerTurn();
 
-        game.displayFinalGameState();
+        displayFinalGameState(game);
 
         game.determineOutcome();
 
@@ -56,7 +82,7 @@ public class ConsoleGame {
 
     public void playerPlays() {
         while (!game.isPlayerDone()) {
-            game.displayGameState();
+            displayGameState(game);
             String command = game.inputFromPlayer();
             handle(command);
         }
