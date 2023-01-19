@@ -1,7 +1,5 @@
 package com.jitterted.ebp.blackjack.domain;
 
-import java.util.Scanner;
-
 public class Game {
 
     private final Deck deck;
@@ -48,13 +46,6 @@ public class Game {
             }
         }
     }
-
-    public String inputFromPlayer() {
-        System.out.println("[H]it or [S]tand?");
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-
 
     public Hand playerHand() {
         return playerHand;

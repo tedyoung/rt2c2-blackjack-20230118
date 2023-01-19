@@ -4,6 +4,8 @@ import com.jitterted.ebp.blackjack.domain.Game;
 import org.fusesource.jansi.Ansi;
 import org.fusesource.jansi.AnsiConsole;
 
+import java.util.Scanner;
+
 import static org.fusesource.jansi.Ansi.ansi;
 
 public class ConsoleGame {
@@ -63,6 +65,12 @@ public class ConsoleGame {
         System.out.println(" (" + game.playerHand().value() + ")");
     }
 
+    public static String inputFromPlayer() {
+        System.out.println("[H]it or [S]tand?");
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+    }
+
     public void start() {
         displayWelcomeScreen();
         waitForEnterFromUser();
@@ -83,7 +91,7 @@ public class ConsoleGame {
     public void playerPlays() {
         while (!game.isPlayerDone()) {
             displayGameState(game);
-            String command = game.inputFromPlayer();
+            String command = inputFromPlayer();
             handle(command);
         }
     }
