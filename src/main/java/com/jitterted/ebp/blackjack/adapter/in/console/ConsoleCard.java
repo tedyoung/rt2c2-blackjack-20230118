@@ -26,7 +26,7 @@ public class ConsoleCard {
                                     .toString(), lines);
     }
 
-    public static void displayBackOfCard() {
+    static void displayBackOfCard() {
         System.out.print(
                 ansi()
                         .cursorUp(7)
