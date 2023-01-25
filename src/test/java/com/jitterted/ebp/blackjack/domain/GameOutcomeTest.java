@@ -41,6 +41,33 @@ class GameOutcomeTest {
                 .isEqualByComparingTo(GameOutcome.PLAYER_PUSHES);
     }
 
+    @Test
+    void playerDealtBlackjackUponInitialDealThenWinsBlackjack() {
+        StubDeck playerDealtBlackjack = new StubDeck(Rank.ACE, Rank.NINE,
+                                                     Rank.JACK, Rank.EIGHT);
+        Game game = new Game(playerDealtBlackjack);
+
+        game.initialDeal();
+
+        assertThat(game.determineOutcome())
+                .isEqualByComparingTo(GameOutcome.PLAYER_WINS_BLACKJACK);
+    }
+
+    @Test
+    void playerWinsButNotWithBlackjackWhenHandValueIs21() {
+        StubDeck playerDealtBlackjack = new StubDeck(Rank.SEVEN, Rank.NINE,
+                                                     Rank.JACK, Rank.EIGHT,
+                                                     Rank.FOUR);
+        Game game = new Game(playerDealtBlackjack);
+        game.initialDeal();
+
+        game.playerHits();
+        game.playerStands();
+        game.dealerTurn();
+
+        assertThat(game.determineOutcome())
+                .isEqualByComparingTo(GameOutcome.PLAYER_BEATS_DEALER);
+    }
 }
 
 
