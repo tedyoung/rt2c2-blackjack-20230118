@@ -46,6 +46,7 @@ public class Hand {
     }
 
     public void drawFrom(Deck deck) {
+        // precondition: hand is not busted
         cards.add(deck.draw());
     }
 
