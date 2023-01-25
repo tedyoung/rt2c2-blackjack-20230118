@@ -23,20 +23,31 @@ public class StubDeck implements Deck {
         this.size = cards.size();
     }
 
-    static Deck createPlayerHitsAndGoesBust() {
+    public static Deck playerHitsAndGoesBust() {
         return new StubDeck(Rank.TEN, Rank.EIGHT,
                             Rank.QUEEN, Rank.JACK,
                             Rank.THREE);
     }
 
-    static Deck playerStandsAndBeatsDealer() {
+    public static Deck playerHitsAndDoesNotGoBust() {
+        return new StubDeck(Rank.SEVEN, Rank.EIGHT,
+                            Rank.QUEEN, Rank.JACK,
+                            Rank.THREE);
+    }
+
+    public static Deck playerNotDealtBlackjackStandsAndBeatsDealer() {
         return new StubDeck(Rank.TEN, Rank.EIGHT,
                             Rank.QUEEN, Rank.JACK);
     }
 
-    static Deck playerStandsAndPushesDealer() {
+    public static Deck playerStandsAndPushesDealer() {
         return new StubDeck(Rank.TEN, Rank.QUEEN,
                             Rank.NINE, Rank.NINE);
+    }
+
+    public static StubDeck playerDealtBlackjack() {
+        return new StubDeck(Rank.ACE, Rank.NINE,
+                            Rank.JACK, Rank.EIGHT);
     }
 
     @Override

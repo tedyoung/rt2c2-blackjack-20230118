@@ -8,7 +8,7 @@ class GameOutcomeTest {
 
     @Test
     void playerHitsAndGoesBustThenOutcomeIsPlayerLoses() {
-        Game game = new Game(StubDeck.createPlayerHitsAndGoesBust());
+        Game game = new Game(StubDeck.playerHitsAndGoesBust());
         game.initialDeal();
 
         game.playerHits();
@@ -19,7 +19,7 @@ class GameOutcomeTest {
 
     @Test
     void playerDealtBetterHandThanDealerAndStandsThenPlayerBeatsDealer() {
-        Game game = new Game(StubDeck.playerStandsAndBeatsDealer());
+        Game game = new Game(StubDeck.playerNotDealtBlackjackStandsAndBeatsDealer());
         game.initialDeal();
 
         game.playerStands();
@@ -43,9 +43,7 @@ class GameOutcomeTest {
 
     @Test
     void playerDealtBlackjackUponInitialDealThenWinsBlackjack() {
-        StubDeck playerDealtBlackjack = new StubDeck(Rank.ACE, Rank.NINE,
-                                                     Rank.JACK, Rank.EIGHT);
-        Game game = new Game(playerDealtBlackjack);
+        Game game = new Game(StubDeck.playerDealtBlackjack());
 
         game.initialDeal();
 
@@ -57,10 +55,10 @@ class GameOutcomeTest {
 
     @Test
     void playerWinsButNotWithBlackjackWhenHandValueIs21() {
-        StubDeck playerDealtBlackjack = new StubDeck(Rank.SEVEN, Rank.NINE,
-                                                     Rank.JACK, Rank.EIGHT,
-                                                     Rank.FOUR);
-        Game game = new Game(playerDealtBlackjack);
+        StubDeck playerNotDealtBlackjackGets21UponHit = new StubDeck(Rank.SEVEN, Rank.NINE,
+                                                                     Rank.JACK, Rank.EIGHT,
+                                                                     Rank.FOUR);
+        Game game = new Game(playerNotDealtBlackjackGets21UponHit);
         game.initialDeal();
 
         game.playerHits();
@@ -73,9 +71,9 @@ class GameOutcomeTest {
 
     @Test
     void playerNotDealtBlackjackUponInitialDealAndDoesNotHitNorStandThenIsNotDone() {
-        StubDeck playerDealtBlackjack = new StubDeck(Rank.SIX, Rank.NINE,
-                                                     Rank.JACK, Rank.EIGHT);
-        Game game = new Game(playerDealtBlackjack);
+        StubDeck playerNotDealtBlackjack = new StubDeck(Rank.SIX, Rank.NINE,
+                                                        Rank.JACK, Rank.EIGHT);
+        Game game = new Game(playerNotDealtBlackjack);
 
         game.initialDeal();
 
