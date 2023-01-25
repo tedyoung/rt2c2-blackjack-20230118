@@ -16,6 +16,9 @@ public class Game {
     public void initialDeal() {
         dealRoundOfCards();
         dealRoundOfCards();
+        if (playerHand.hasBlackjack()) {
+            playerDone = true;
+        }
     }
 
     private void dealRoundOfCards() {
@@ -25,6 +28,11 @@ public class Game {
     }
 
     public GameOutcome determineOutcome() {
+        // precondition: playerDone == true, i.e., player must have completed their turn to ask this question
+        // could implement the precondition check using this guard clause:
+        //        if (!playerDone) {
+        //            throw new IllegalStateException();
+        //        }
         if (playerHand.isBusted()) {
             return GameOutcome.PLAYER_BUSTED;
         } else if (playerHand.hasBlackjack()) {

@@ -54,10 +54,12 @@ public class Hand {
     }
 
     boolean pushes(Hand hand) {
+        // precondition: neither this hand nor the hand parameter are busted
         return hand.value() == value();
     }
 
     boolean beats(Hand hand) {
+        // precondition: neither this hand nor the hand parameter are busted
         return hand.value() < value();
     }
 

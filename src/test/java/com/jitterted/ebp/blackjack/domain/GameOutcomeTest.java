@@ -51,6 +51,8 @@ class GameOutcomeTest {
 
         assertThat(game.determineOutcome())
                 .isEqualByComparingTo(GameOutcome.PLAYER_WINS_BLACKJACK);
+        assertThat(game.isPlayerDone())
+                .isTrue();
     }
 
     @Test
@@ -68,6 +70,19 @@ class GameOutcomeTest {
         assertThat(game.determineOutcome())
                 .isEqualByComparingTo(GameOutcome.PLAYER_BEATS_DEALER);
     }
+
+    @Test
+    void playerNotDealtBlackjackUponInitialDealAndDoesNotHitNorStandThenIsNotDone() {
+        StubDeck playerDealtBlackjack = new StubDeck(Rank.SIX, Rank.NINE,
+                                                     Rank.JACK, Rank.EIGHT);
+        Game game = new Game(playerDealtBlackjack);
+
+        game.initialDeal();
+
+        assertThat(game.isPlayerDone())
+                .isFalse();
+    }
+
 }
 
 
