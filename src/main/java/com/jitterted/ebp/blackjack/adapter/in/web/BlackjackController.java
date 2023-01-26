@@ -38,13 +38,6 @@ public class BlackjackController {
         return redirectBasedOnPlayerDone();
     }
 
-    public String redirectBasedOnPlayerDone() {
-        if (game.isPlayerDone()) {
-            return "redirect:/done";
-        }
-        return "redirect:/game";
-    }
-
     @PostMapping("/start-game")
     public String startGame() {
         game.initialDeal();
@@ -55,6 +48,13 @@ public class BlackjackController {
     public String standCommand() {
         game.playerStands();
         return redirectBasedOnPlayerDone();
+    }
+
+    private String redirectBasedOnPlayerDone() {
+        if (game.isPlayerDone()) {
+            return "redirect:/done";
+        }
+        return "redirect:/game";
     }
 
 }
