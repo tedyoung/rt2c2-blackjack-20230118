@@ -93,7 +93,6 @@ class GameOutcomeTest {
                 .hasSize(3);
     }
 
-
 }
 
 
