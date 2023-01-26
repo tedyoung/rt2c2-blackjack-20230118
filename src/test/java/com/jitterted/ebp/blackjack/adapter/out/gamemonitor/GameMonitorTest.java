@@ -22,4 +22,15 @@ class GameMonitorTest {
         verify(gameMonitorSpy).roundCompleted(any(Game.class));
     }
 
+    @Test
+    public void playerHitsAndGoesBustThenGameResultsSentToMonitor() throws Exception {
+        GameMonitor gameMonitorSpy = spy(GameMonitor.class);
+        Game game = new Game(StubDeck.playerHitsAndGoesBust(), gameMonitorSpy);
+        game.initialDeal();
+
+        game.playerHits();
+
+        verify(gameMonitorSpy).roundCompleted(any(Game.class));
+    }
+
 }
