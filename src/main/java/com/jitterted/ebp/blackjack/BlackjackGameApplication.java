@@ -1,5 +1,6 @@
 package com.jitterted.ebp.blackjack;
 
+import com.jitterted.ebp.blackjack.adapter.out.gamemonitor.HttpGameMonitor;
 import com.jitterted.ebp.blackjack.domain.Game;
 import com.jitterted.ebp.blackjack.domain.ShuffledDeck;
 import org.springframework.boot.SpringApplication;
@@ -15,6 +16,8 @@ public class BlackjackGameApplication {
 
     @Bean
     public Game createGame() {
-        return new Game(new ShuffledDeck());
+        ShuffledDeck deck = new ShuffledDeck();
+        HttpGameMonitor gameMonitor = new HttpGameMonitor();
+        return new Game(deck, gameMonitor);
     }
 }
